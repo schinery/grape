@@ -160,7 +160,7 @@ content negotiation, versioning and much more.
 
 ## Stable Release
 
-You're reading the documentation for the next release of Grape, which should be **1.8.1**.
+You're reading the documentation for the next release of Grape, which should be **2.0.0**.
 Please read [UPGRADING](UPGRADING.md) when upgrading from a previous version.
 The current stable release is [1.8.0](https://github.com/ruby-grape/grape/blob/v1.8.0/README.md).
 
@@ -180,7 +180,7 @@ The maintainers of Grape are working with Tidelift to deliver commercial support
 
 ## Installation
 
-Ruby 2.6 or newer is required.
+Ruby 2.6 or newer is required. This version supports Rack >= 3. 
 
 Grape is available as a gem, to install it run:
 
@@ -730,7 +730,7 @@ XML content-types.
 The request:
 
 ```
-curl -d '{"text": "140 characters"}' 'http://localhost:9292/statuses' -H Content-Type:application/json -v
+curl -d '{"text": "140 characters"}' 'http://localhost:9292/statuses' -H content-type:application/json -v
 ```
 
 The Grape endpoint:
@@ -819,7 +819,7 @@ If you do not specify any parameters, `declared` will return an empty hash.
 **Request**
 
 ````bash
-curl -X POST -H "Content-Type: application/json" localhost:9292/users/signup -d '{"user": {"first_name":"first name", "last_name": "last name"}}'
+curl -X POST -H "content-type: application/json" localhost:9292/users/signup -d '{"user": {"first_name":"first name", "last_name": "last name"}}'
 ````
 
 **Response**
@@ -851,7 +851,7 @@ end
 **Request**
 
 ````bash
-curl -X POST -H "Content-Type: application/json" localhost:9292/users/signup -d '{"user": {"first_name":"first name", "last_name": "last name", "random": "never shown"}}'
+curl -X POST -H "content-type: application/json" localhost:9292/users/signup -d '{"user": {"first_name":"first name", "last_name": "last name", "random": "never shown"}}'
 ````
 
 **Response**
@@ -888,7 +888,7 @@ end
 **Request**
 
 ````bash
-curl -X POST -H "Content-Type: application/json" localhost:9292/users/signup -d '{}'
+curl -X POST -H "content-type: application/json" localhost:9292/users/signup -d '{}'
 ````
 
 **Response**
@@ -938,7 +938,7 @@ end
 **Request**
 
 ````bash
-curl -X GET -H "Content-Type: application/json" localhost:9292/parent/foo/bar
+curl -X GET -H "content-type: application/json" localhost:9292/parent/foo/bar
 ````
 
 **Response**
@@ -977,7 +977,7 @@ end
 **Request**
 
 ````bash
-curl -X POST -H "Content-Type: application/json" localhost:9292/users/signup -d '{"user": {"first_name":"first name", "random": "never shown"}}'
+curl -X POST -H "content-type: application/json" localhost:9292/users/signup -d '{"user": {"first_name":"first name", "random": "never shown"}}'
 ````
 
 **Response with include_missing:false**
@@ -1029,7 +1029,7 @@ end
 **Request**
 
 ````bash
-curl -X POST -H "Content-Type: application/json" localhost:9292/users/signup -d '{"user": {"first_name":"first name", "random": "never shown", "address": { "city": "SF"}}}'
+curl -X POST -H "content-type: application/json" localhost:9292/users/signup -d '{"user": {"first_name":"first name", "random": "never shown", "address": { "city": "SF"}}}'
 ````
 
 **Response with include_missing:false**
@@ -1070,7 +1070,7 @@ when `include_missing` is set to `false`:
 **Request**
 
 ````bash
-curl -X POST -H "Content-Type: application/json" localhost:9292/users/signup -d '{"user": {"first_name":"first name", "last_name": null, "address": { "city": "SF"}}}'
+curl -X POST -H "content-type: application/json" localhost:9292/users/signup -d '{"user": {"first_name":"first name", "last_name": null, "address": { "city": "SF"}}}'
 ````
 
 **Response with include_missing:false**
@@ -1109,7 +1109,7 @@ end
 **Request**
 
 ````bash
-curl -X POST -H "Content-Type: application/json" localhost:9292/child -d '{"father_id": 1}'
+curl -X POST -H "content-type: application/json" localhost:9292/child -d '{"father_id": 1}'
 ````
 
 **Response with evaluate_given:false**
@@ -1155,7 +1155,7 @@ end
 **Request**
 
 ````bash
-curl -X POST -H "Content-Type: application/json" localhost:9292/child -d '{"child": {"father_id": 1}}'
+curl -X POST -H "content-type: application/json" localhost:9292/child -d '{"child": {"father_id": 1}}'
 ````
 
 **Response with evaluate_given:false**
@@ -2130,7 +2130,7 @@ curl -H "secret_PassWord: swordfish" ...
 
 The header name will have been normalized for you.
 
-- In the `header` helper names will be coerced into a capitalized kebab case.
+- In the `header` helper names will be coerced into a downcased kebab case.
 - In the `env` collection they appear in all uppercase, in snake case, and prefixed with 'HTTP_'.
 
 The header name will have been normalized per HTTP standards defined in [RFC2616 Section 4.2](https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2) regardless of what is being sent by a client.
@@ -2140,13 +2140,13 @@ The header name will have been normalized per HTTP standards defined in [RFC2616
 You can set a response header with `header` inside an API.
 
 ```ruby
-header 'X-Robots-Tag', 'noindex'
+header 'x-robots-tag', 'noindex'
 ```
 
 When raising `error!`, pass additional headers as arguments. Additional headers will be merged with headers set before `error!` call.
 
 ```ruby
-error! 'Unauthorized', 401, 'X-Error-Detail' => 'Invalid token.'
+error! 'Unauthorized', 401, 'x-error-detail' => 'Invalid token.'
 ```
 
 ## Routes
@@ -2661,7 +2661,7 @@ class Twitter::API < Grape::API
 end
 ```
 
-The error format will match the request format. See "Content-Types" below.
+The error format will match the request format. See "content-types" below.
 
 Custom error formatters for existing and additional types can be defined with a proc.
 
@@ -2703,7 +2703,7 @@ Optionally, you can set the format, status code and headers.
 class Twitter::API < Grape::API
   format :json
   rescue_from :all do |e|
-    error!({ error: 'Server error.' }, 500, { 'Content-Type' => 'text/error' })
+    error!({ error: 'Server error.' }, 500, { 'content-type' => 'text/error' })
   end
 end
 ```
@@ -2774,7 +2774,7 @@ class Twitter::API < Grape::API
   format :json
   helpers do
     def server_error!
-      error!({ error: 'Server error.' }, 500, { 'Content-Type' => 'text/error' })
+      error!({ error: 'Server error.' }, 500, { 'content-type' => 'text/error' })
     end
   end
 
@@ -2793,7 +2793,7 @@ class Twitter::API < Grape::API
   format :json
   helpers do
     def server_error!
-      error!({ error: 'Server error.' }, 500, { 'Content-Type' => 'text/error' })
+      error!({ error: 'Server error.' }, 500, { 'content-type' => 'text/error' })
     end
   end
 
@@ -2857,7 +2857,7 @@ to a HTML error page.
 
 Most APIs will enjoy preventing downstream handlers from handling errors. You may set the
 `:cascade` option to `false` for the entire API or separately on specific `version` definitions,
-which will remove the `X-Cascade: true` header from API responses.
+which will remove the `x-cascade: true` header from API responses.
 
 ```ruby
 cascade false
@@ -3092,7 +3092,7 @@ Built-in formatters are the following.
 * `:serializable_hash`: use object's `serializable_hash` when available, otherwise fallback to `:json`
 * `:binary`: data will be returned "as is"
 
-If a body is present in a request to an API, with a Content-Type header value that is of an unsupported type a
+If a body is present in a request to an API, with a content-type header value that is of an unsupported type a
 "415 Unsupported Media Type" error code will be returned by Grape.
 
 Response statuses that indicate no content as defined by [Rack](https://github.com/rack)
@@ -3140,7 +3140,7 @@ run Twitter::API
 ## Content-type
 
 Content-type is set by the formatter. You can override the content-type of the response at runtime
-by setting the `Content-Type` header.
+by setting the `content-type` header.
 
 ```ruby
 class API < Grape::API
@@ -3185,7 +3185,7 @@ end
 You can invoke the above API as follows.
 
 ```
-curl -X PUT -d 'data' 'http://localhost:9292/value' -H Content-Type:text/custom -v
+curl -X PUT -d 'data' 'http://localhost:9292/value' -H content-type:text/custom -v
 ```
 
 You can disable parsing for a content-type with `nil`. For example, `parser :json, nil` will disable JSON parsing altogether. The request data is then available as-is in `env['api.request.body']`.
@@ -3766,7 +3766,7 @@ Your middleware can overwrite application response as follows, except error case
 ```ruby
 class Overwriter < Grape::Middleware::Base
   def after
-    [200, { 'Content-Type' => 'text/plain' }, ['Overwritten.']]
+    [200, { 'content-type' => 'text/plain' }, ['Overwritten.']]
   end
 end
 ```
@@ -3776,7 +3776,7 @@ You can add your custom middleware with `use`, that push the middleware onto the
 ```ruby
 class CustomOverwriter < Grape::Middleware::Base
   def after
-    [200, { 'Content-Type' => 'text/plain' }, [@options[:message]]]
+    [200, { 'content-type' => 'text/plain' }, [@options[:message]]]
   end
 end
 

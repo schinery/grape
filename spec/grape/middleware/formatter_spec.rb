@@ -165,36 +165,36 @@ describe Grape::Middleware::Formatter do
   context 'content-type' do
     it 'is set for json' do
       _, headers, = subject.call('PATH_INFO' => '/info.json')
-      expect(headers['Content-type']).to eq('application/json')
+      expect(headers['content-type']).to eq('application/json')
     end
 
     it 'is set for xml' do
       _, headers, = subject.call('PATH_INFO' => '/info.xml')
-      expect(headers['Content-type']).to eq('application/xml')
+      expect(headers['content-type']).to eq('application/xml')
     end
 
     it 'is set for txt' do
       _, headers, = subject.call('PATH_INFO' => '/info.txt')
-      expect(headers['Content-type']).to eq('text/plain')
+      expect(headers['content-type']).to eq('text/plain')
     end
 
     it 'is set for custom' do
       subject.options[:content_types] = {}
       subject.options[:content_types][:custom] = 'application/x-custom'
       _, headers, = subject.call('PATH_INFO' => '/info.custom')
-      expect(headers['Content-type']).to eq('application/x-custom')
+      expect(headers['content-type']).to eq('application/x-custom')
     end
 
     it 'is set for vendored with registered type' do
       subject.options[:content_types] = {}
       subject.options[:content_types][:custom] = 'application/vnd.test+json'
       _, headers, = subject.call('PATH_INFO' => '/info', 'HTTP_ACCEPT' => 'application/vnd.test+json')
-      expect(headers['Content-type']).to eq('application/vnd.test+json')
+      expect(headers['content-type']).to eq('application/vnd.test+json')
     end
 
     it 'is set to closest generic for custom vendored/versioned without registered type' do
       _, headers, = subject.call('PATH_INFO' => '/info', 'HTTP_ACCEPT' => 'application/vnd.test+json')
-      expect(headers['Content-type']).to eq('application/json')
+      expect(headers['content-type']).to eq('application/json')
     end
   end
 
@@ -245,7 +245,7 @@ describe Grape::Middleware::Formatter do
     content_types = ['application/json', 'application/json; charset=utf-8'].freeze
     %w[POST PATCH PUT DELETE].each do |method|
       context 'when body is not nil or empty' do
-        context 'when Content-Type is supported' do
+        context 'when content-type is supported' do
           let(:io) { StringIO.new('{"is_boolean":true,"string":"thing"}') }
           let(:content_type) { 'application/json' }
 
@@ -262,7 +262,7 @@ describe Grape::Middleware::Formatter do
           end
         end
 
-        context 'when Content-Type is not supported' do
+        context 'when content-type is not supported' do
           let(:io) { StringIO.new('{"is_boolean":true,"string":"thing"}') }
           let(:content_type) { 'application/atom+xml' }
 

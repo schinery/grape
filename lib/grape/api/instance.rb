@@ -168,13 +168,13 @@ module Grape
       end
 
       # Some requests may return a HTTP 404 error if grape cannot find a matching
-      # route. In this case, Grape::Router adds a X-Cascade header to the response
+      # route. In this case, Grape::Router adds a x-cascade header to the response
       # and sets it to 'pass', indicating to grape's parents they should keep
       # looking for a matching route on other resources.
       #
       # In some applications (e.g. mounting grape on rails), one might need to trap
       # errors from reaching upstream. This is effectivelly done by unsetting
-      # X-Cascade. Default :cascade is true.
+      # x-cascade. Default :cascade is true.
       def cascade?
         return self.class.namespace_inheritable(:cascade) if self.class.inheritable_setting.namespace_inheritable.key?(:cascade)
         return self.class.namespace_inheritable(:version_options)[:cascade] if self.class.namespace_inheritable(:version_options)&.key?(:cascade)

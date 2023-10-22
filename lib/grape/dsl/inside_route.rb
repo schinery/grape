@@ -185,7 +185,7 @@ module Grape
           status 302
           body_message ||= "This resource has been moved temporarily to #{url}."
         end
-        header 'Location', url
+        header 'location', url
         content_type 'text/plain'
         body body_message
       end
@@ -312,7 +312,7 @@ module Grape
 
       # Allows you to define the response as a streamable object.
       #
-      # If Content-Length and Transfer-Encoding are blank (among other conditions),
+      # If content-length and transfer-encoding are blank (among other conditions),
       # Rack assumes this response can be streamed in chunks.
       #
       # @example
@@ -328,9 +328,9 @@ module Grape
       def stream(value = nil)
         return if value.nil? && @stream.nil?
 
-        header 'Content-Length', nil
-        header 'Transfer-Encoding', nil
-        header 'Cache-Control', 'no-cache' # Skips ETag generation (reading the response up front)
+        header 'content-length', nil
+        header 'transfer-encoding', nil
+        header 'cache-control', 'no-cache' # Skips ETag generation (reading the response up front)
         if value.is_a?(String)
           file_body = Grape::ServeStream::FileBody.new(value)
           @stream = Grape::ServeStream::StreamResponse.new(file_body)

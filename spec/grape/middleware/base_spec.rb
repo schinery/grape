@@ -161,11 +161,11 @@ describe Grape::Middleware::Base do
     module HeaderSpec
       class ExampleWare < Grape::Middleware::Base
         def before
-          header 'X-Test-Before', 'Hi'
+          header 'x-test-before', 'Hi'
         end
 
         def after
-          header 'X-Test-After', 'Bye'
+          header 'x-test-after', 'Bye'
           nil
         end
       end
@@ -180,8 +180,8 @@ describe Grape::Middleware::Base do
 
     it 'is able to set a header' do
       get '/'
-      expect(last_response.headers['X-Test-Before']).to eq('Hi')
-      expect(last_response.headers['X-Test-After']).to eq('Bye')
+      expect(last_response.headers['x-test-before']).to eq('Hi')
+      expect(last_response.headers['x-test-after']).to eq('Bye')
     end
   end
 
@@ -189,18 +189,18 @@ describe Grape::Middleware::Base do
     module HeaderOverwritingSpec
       class ExampleWare < Grape::Middleware::Base
         def before
-          header 'X-Test-Overwriting', 'Hi'
+          header 'x-test-overwriting', 'Hi'
         end
 
         def after
-          header 'X-Test-Overwriting', 'Bye'
+          header 'x-test-overwriting', 'Bye'
           nil
         end
       end
 
       class API < Grape::API
         get('/') do
-          header 'X-Test-Overwriting', 'Yeah'
+          header 'x-test-overwriting', 'Yeah'
           'Hello'
         end
       end
@@ -215,7 +215,7 @@ describe Grape::Middleware::Base do
 
     it 'overwrites header by after headers' do
       get '/'
-      expect(last_response.headers['X-Test-Overwriting']).to eq('Bye')
+      expect(last_response.headers['x-test-overwriting']).to eq('Bye')
     end
   end
 end

@@ -91,7 +91,7 @@ module Grape
         end
 
         it 'cuts HTTP_ prefix and capitalizes header name words' do
-          expect(request.headers).to eq('X-Grape-Is-Cool' => 'yeah')
+          expect(request.headers).to eq('x-grape-is-cool' => 'yeah')
         end
       end
 
@@ -118,7 +118,7 @@ module Grape
         end
 
         it 'converts them to string' do
-          expect(request.headers).to eq('Grape-Likes-Symbolic' => 'it is true')
+          expect(request.headers).to eq('grape-likes-symbolic' => 'it is true')
         end
       end
     end

@@ -18,8 +18,8 @@ describe Grape::Exceptions::InvalidAcceptHeader do
   end
 
   shared_examples_for 'a not-cascaded request' do
-    it 'does not include the X-Cascade=pass header' do
-      expect(last_response.headers['X-Cascade']).to be_nil
+    it 'does not include the x-cascade=pass header' do
+      expect(last_response.headers['x-cascade']).to be_nil
     end
 
     it 'does not accept the request' do
@@ -28,8 +28,8 @@ describe Grape::Exceptions::InvalidAcceptHeader do
   end
 
   shared_examples_for 'a rescued request' do
-    it 'does not include the X-Cascade=pass header' do
-      expect(last_response.headers['X-Cascade']).to be_nil
+    it 'does not include the x-cascade=pass header' do
+      expect(last_response.headers['x-cascade']).to be_nil
     end
 
     it 'does show rescue handler processing' do

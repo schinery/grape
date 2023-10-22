@@ -146,14 +146,14 @@ describe Grape::Endpoint do
 
     it 'includes additional request headers' do
       get '/headers', nil, 'HTTP_X_GRAPE_CLIENT' => '1'
-      expect(JSON.parse(last_response.body)['X-Grape-Client']).to eq('1')
+      expect(JSON.parse(last_response.body)['x-grape-client']).to eq('1')
     end
 
     it 'includes headers passed as symbols' do
       env = Rack::MockRequest.env_for('/headers')
       env[:HTTP_SYMBOL_HEADER] = 'Goliath passes symbols'
       body = read_chunks(subject.call(env)[2]).join
-      expect(JSON.parse(body)['Symbol-Header']).to eq('Goliath passes symbols')
+      expect(JSON.parse(body)['symbol-header']).to eq('Goliath passes symbols')
     end
   end
 
@@ -497,7 +497,7 @@ describe Grape::Endpoint do
       end
 
       it 'responses with given content type in headers' do
-        expect(last_response.headers['Content-Type']).to eq 'application/json; charset=utf-8'
+        expect(last_response.headers['content-type']).to eq 'application/json; charset=utf-8'
       end
     end
 
@@ -657,7 +657,7 @@ describe Grape::Endpoint do
       end
       get '/hey'
       expect(last_response.status).to eq 302
-      expect(last_response.headers['Location']).to eq '/ha'
+      expect(last_response.headers['location']).to eq '/ha'
       expect(last_response.body).to eq 'This resource has been moved temporarily to /ha.'
     end
 
@@ -667,7 +667,7 @@ describe Grape::Endpoint do
       end
       post '/hey', {}, 'HTTP_VERSION' => 'HTTP/1.1'
       expect(last_response.status).to eq 303
-      expect(last_response.headers['Location']).to eq '/ha'
+      expect(last_response.headers['location']).to eq '/ha'
       expect(last_response.body).to eq 'An alternate resource is located at /ha.'
     end
 
@@ -677,7 +677,7 @@ describe Grape::Endpoint do
       end
       get '/hey'
       expect(last_response.status).to eq 301
-      expect(last_response.headers['Location']).to eq '/ha'
+      expect(last_response.headers['location']).to eq '/ha'
       expect(last_response.body).to eq 'This resource has been moved permanently to /ha.'
     end
 

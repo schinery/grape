@@ -1,6 +1,10 @@
 Upgrading Grape
 ===============
 
+### Upgrading to 2.0.0
+
+SOME NOTES ABOUT UPGRADING TO VERSION 2 NEED TO GO HERE.
+
 ### Upgrading to >= 1.7.0
 
 #### Exceptions renaming

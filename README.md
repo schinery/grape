@@ -15,7 +15,6 @@
 - [Grape for Enterprise](#grape-for-enterprise)
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
-- [Rails 7.1](#rails-71)
 - [Mounting](#mounting)
   - [All](#all)
   - [Rack](#rack)
@@ -26,6 +25,7 @@
   - [Rails](#rails)
     - [Rails < 5.2](#rails--52)
     - [Rails 6.0](#rails-60)
+    - [Rails >= 7.1](#rails--71)
   - [Modules](#modules)
 - [Remounting](#remounting)
   - [Mount Configuration](#mount-configuration)
@@ -269,10 +269,6 @@ module Twitter
 end
 ```
 
-## Rails 7.1
-
-Grape's [deprecator](https://api.rubyonrails.org/v7.1.0/classes/ActiveSupport/Deprecation.html) will be added to your application's deprecators [automatically](lib/grape/railtie.rb) as `:grape`, so that your application's configuration can be applied to it.
-
 ## Mounting
 
 ### All
@@ -395,6 +391,10 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym 'API'
 end
 ```
+
+#### Rails >= 7.1
+
+You will need to use version >= 2.0.0 of Grape as that supports Rack >= 3.0, which Rails bumped to in >= 7.1.
 
 ### Modules
 

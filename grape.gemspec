@@ -20,11 +20,11 @@ Gem::Specification.new do |s|
     'source_code_uri' => "https://github.com/ruby-grape/grape/tree/v#{s.version}"
   }
 
-  s.add_runtime_dependency 'activesupport', '>= 5'
+  s.add_runtime_dependency 'activesupport', '>= 5', '< 7.1'
   s.add_runtime_dependency 'builder'
   s.add_runtime_dependency 'dry-types', '>= 1.1'
   s.add_runtime_dependency 'mustermann-grape', '~> 1.0.0'
-  s.add_runtime_dependency 'rack', '>= 1.3.0'
+  s.add_runtime_dependency 'rack', '>= 1.3.0', '< 3'
   s.add_runtime_dependency 'rack-accept'
 
   s.files = Dir['lib/**/*', 'CHANGELOG.md', 'CONTRIBUTING.md', 'README.md', 'grape.png', 'UPGRADING.md', 'LICENSE', 'grape.gemspec']

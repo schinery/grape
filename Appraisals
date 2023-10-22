@@ -16,14 +16,6 @@ appraise 'rails-7' do
   gem 'rails', '~> 7.0'
 end
 
-appraise 'rails-edge' do
-  gem 'rails', github: 'rails/rails'
-end
-
-appraise 'rack-edge' do
-  gem 'rack', github: 'rack/rack'
-end
-
 appraise 'multi_json' do
   gem 'multi_json', require: 'multi_json'
 end
@@ -38,8 +30,4 @@ end
 
 appraise 'rack2' do
   gem 'rack', '~> 2.0.0'
-end
-
-appraise 'rack3' do
-  gem 'rack', '~> 3.0.0'
 end

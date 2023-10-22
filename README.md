@@ -180,7 +180,7 @@ The maintainers of Grape are working with Tidelift to deliver commercial support
 
 ## Installation
 
-Ruby 2.6 or newer is required.
+Ruby 2.6 or newer is required. This version supports Rack < 3.
 
 Grape is available as a gem, to install it run:
 

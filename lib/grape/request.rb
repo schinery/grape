@@ -50,7 +50,7 @@ module Grape
       if Gem::Version.new(Rack.release) < Gem::Version.new('3')
         -header[5..].split('_').each(&:capitalize!).join('-')
       else
-        -header[5..].split('_').each(&:downcase!).join('-')
+        -header[5..].tr('_', '-').downcase!
       end
     end
   end
